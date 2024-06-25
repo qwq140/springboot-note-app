@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.noteappserver.model.note.NoteRepository">
+    <insert id="save">
+        INSERT INTO NOTE(TITLE, CONTENT, MEMBER_ID, CREATED_AT, UPDATED_AT)
+        VALUES (#{title}, #{content}, #{memberId}, now(), now())
+    </insert>
+
+    <select id="findByMemberId">
+        SELECT * FROM NOTE WHERE MEMBER_ID = #{memberId}
+    </select>
+
+    <select id="findById">
+        SELECT * FROM NOTE WHERE ID = #{id}
+    </select>
+
+    <update id="update">
+        UPDATE NOTE
+        SET TITLE = #{title}, CONTENT = #{content}, UPDATED_AT = now()
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM NOTE
+        WHERE ID = #{id}
+    </delete>
+</mapper>

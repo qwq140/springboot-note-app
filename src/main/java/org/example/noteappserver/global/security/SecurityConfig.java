@@ -52,7 +52,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) ->
                         authorize
                                 .requestMatchers(PathRequest.toH2Console()).permitAll()
-                                .requestMatchers(USER).hasAnyAuthority("USER")
                                 .requestMatchers(WHITELIST).permitAll()
                                 .anyRequest().authenticated()
                 )
@@ -86,10 +85,5 @@ public class SecurityConfig {
             "/api/v1/auth/join",
             "/api/v1/auth/login",
             "/error"
-    };
-
-    public static final String[] USER = {
-            "/test",
-            "/test/**"
     };
 }
