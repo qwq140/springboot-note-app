@@ -54,6 +54,7 @@ public class SecurityConfig {
                                 .requestMatchers(PathRequest.toH2Console()).permitAll()
                                 .requestMatchers(USER).hasAnyAuthority("USER")
                                 .requestMatchers(WHITELIST).permitAll()
+                                .anyRequest().authenticated()
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
 
@@ -84,9 +85,11 @@ public class SecurityConfig {
     public static final String[] WHITELIST = {
             "/api/v1/auth/join",
             "/api/v1/auth/login",
+            "/error"
     };
 
     public static final String[] USER = {
-            "/test"
+            "/test",
+            "/test/**"
     };
 }
