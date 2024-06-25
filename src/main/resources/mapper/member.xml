@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.noteappserver.model.member.MemberRepository">
+    <select id="findByUsername">
+        SELECT * FROM MEMBER WHERE USERNAME = #{username}
+    </select>
+
+    <select id="findById">
+        SELECT * FROM MEMBER WHERE ID = #{id}
+    </select>
+
+    <insert id="save">
+        INSERT INTO MEMBER(USERNAME, PASSWORD, NICKNAME, ROLE, CREATED_AT, UPDATED_AT) VALUES (#{username}, #{password}, #{nickname}, #{role}, now(), now())
+    </insert>
+</mapper>
