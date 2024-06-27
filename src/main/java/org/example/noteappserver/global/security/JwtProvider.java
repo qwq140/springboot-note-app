@@ -47,7 +47,7 @@ public class JwtProvider {
             DecodedJWT verify = verify(jwt);
 
             if(new Date().after(verify.getExpiresAt())) {
-                throw new Exception403("토큰이 만료되었습니다.");
+                throw new Exception401("토큰이 만료되었습니다.");
             }
 
             if(!verify.getClaim("token-type").asString().equals(JwtType.ACCESS_TOKEN.name())) {

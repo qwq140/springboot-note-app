@@ -7,11 +7,13 @@ import java.time.LocalDateTime;
 
 @Getter
 public class NoteResponseDTO {
+    private Long id;
     private String title;
     private String content;
     private LocalDateTime updatedAt;
 
     public NoteResponseDTO(Note note) {
+        this.id = note.getId();
         this.title = note.getTitle();
         this.content = note.getContent();
         this.updatedAt = note.getUpdatedAt();
