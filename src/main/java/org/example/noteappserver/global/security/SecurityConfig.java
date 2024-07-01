@@ -84,6 +84,7 @@ public class SecurityConfig {
     public static final String[] WHITELIST = {
             "/api/v1/auth/join",
             "/api/v1/auth/login",
+            "/api/v1/auth/renewal",
             "/error"
     };
 }

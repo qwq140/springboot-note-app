@@ -1,6 +1,8 @@
 package org.example.noteappserver.global.exception;
 
-public class Exception401 extends RuntimeException{
+import org.springframework.security.core.AuthenticationException;
+
+public class Exception401 extends AuthenticationException {
     public Exception401(String message) {
         super(message);
     }

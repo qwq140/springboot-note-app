@@ -6,6 +6,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.noteappserver.global.exception.Exception401;
 import org.example.noteappserver.global.exception.Exception403;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,18 +30,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String jwt = resolveToken(request);
 
         if(StringUtils.hasText(jwt)) {
-           if (!jwtProvider.validateToken(jwt)){
-               throw new Exception403("접근이 거부되었습니다.");
-           }
-
-           try {
-               Authentication authentication = jwtProvider.getAuthentication(jwt);
-               SecurityContextHolder.getContext().setAuthentication(authentication);
-           } catch (TokenExpiredException | SignatureVerificationException exception) {
-               exception.printStackTrace();
+           if (jwtProvider.validateToken(jwt)){
+               try {
+                   Authentication authentication = jwtProvider.getAuthentication(jwt);
+                   SecurityContextHolder.getContext().setAuthentication(authentication);
+               } catch (TokenExpiredException | SignatureVerificationException exception) {
+                   exception.printStackTrace();
+               }
            }
         }
-
         filterChain.doFilter(request, response);
     }
 
